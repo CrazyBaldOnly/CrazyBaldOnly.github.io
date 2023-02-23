@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Михайлов Николай</title>
+</head>
+<body>
+<script>
+  "use strict";
+  const a = parseFloat(prompt("Введите a", ""));
+  const x = parseFloat(prompt("Введите x", ""));
+  const y = parseFloat(prompt("Введите y", ""));
+  const z = parseFloat(prompt("Введите z", ""));
+
+  const solV = Math.pow(a, 3);
+  const solS = 6 * Math.pow(a, 2);
+  const solB = Math.pow(Number.EPSILON, Math.abs(x - y)) * Math.pow((Math.pow(Math.tan(z), 2) + 1), x);
+
+  document.write(`<p>Объем и площадь поверхности куба со стороной а</p>`);
+  document.write(`<img src="images/1imgNikolai.png">`);
+  document.write(`<p>Ответ: V = ${solV}; S = ${solS};</p>`);
+
+  document.write(`<img src="images/2imgNikolai.png">`);
+  document.write(`<p>Ответ: B = ${solB};</p>`);
+  document.write(`<p>Михайлов Николай</p>`);
+
+</script>
+</body>
+</html>
