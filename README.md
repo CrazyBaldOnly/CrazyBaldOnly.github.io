@@ -25,3 +25,5 @@
 ⠀⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿⠁⠀⠈⠻⣿⣿⣿⣿⡿⠏⠀⠀⠀⠀    
 ⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   
 ](https://www.youtube.com/watch?v=grd-K33tOSM)
+# Лабораторная работа 2
+[Лабораторное задание 1](https://crazybaldonly.github.io/Laboratornaya1/lab2-1.html)
