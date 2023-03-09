@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Михайлов Николай</title>
+</head>
+<body>
+<script>
+    "use strict";
+
+    let promptMessage = "Введите значение x"
+    let x = prompt(promptMessage, "");
+
+    while (!isFinite(x) || x == null || x === "") {
+        x = prompt(promptMessage, "");
+    }
+    x = Number(x);
+    let y;
+
+    if (x > 0 && x !== 3) {
+        y = 2 * x ** 2;
+    } else if (x <= -2) {
+        y = Math.sqrt((x ** 2) + 1);
+    } else {
+        y = Math.abs(x + 5);
+    }
+
+
+    document.write(`<p>Y = ${y}</p>`);
+    document.write("<img src='./images/10.png'/>");
+</script>
+</body>
+</html>
