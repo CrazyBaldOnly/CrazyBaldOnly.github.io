@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/index.css">
+    <title>Михайлов Николай</title>
+</head>
+<body>
+<script>
+    "use strict";
+    document.write("<table>");
+    let a = 1;
+    let b = 100;
+    let n = 14;
+    let resolves = {};
+
+    for (let i = 1; i < n; i++) {
+        resolves[i * (i + 1) / 2] = i;
+    }
+
+    document.write("<tr>");
+    for (; a <= b; a++) {
+        if (a in resolves) {
+            document.write(`<td class="redTile">${a}</td>`);
+        } else {
+            document.write(`<td>${a}</td>`);
+        }
+            
+        if(!(a % 10) && a) {
+            document.write("</tr><tr>");
+        }
+    }
+
+    document.write("</table>");
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Михайлов Николай</title>
+</head>
+<body>
+<script>
+    "use strict";
+    const lang = prompt("Введите язык", "");
+    let output = "";
+
+    if (lang === "ru") {
+        output = "Русский";
+    } else if (lang === "en") {
+        output = "Английский";
+    } else if (lang === "fr") {
+        output = "Французский";
+    } else if (lang === "de") {
+        output = "Немецкий";
+    } else {
+        output = "Язык неизвестен";
+    }
+
+    document.write(`<p>${output}</p>`);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Михайлов Николай</title>
+</head>
+<body>
+<script>
+    "use strict";
+
+    let promptMessage = "Введите значение x"
+    let x = null;
+    
+    while (!x) {
+        try {
+            x = prompt(promptMessage, "");
+            if (!isFinite(x) || x == null || x === "") {
+                throw new Error("Введите корректное число");
+            }
+        } catch (e) {
+            alert(e.message);
+            x = null;
+        }
+    }
+
+    x = Number(x);
+    let y;
+
+
+    switch (true) {
+        case (x > 0 && x !== 3):
+            y = 2 * x ** 2;
+            break;
+        case (x <= -2): 
+            y = Math.sqrt((x ** 2) + 1);
+            break;
+        default: 
+            y = Math.abs(x + 5);
+    }
+
+
+    document.write(`<p>Y = ${y}</p>`);
+    document.write("<img src='./images/10.png'/>");
+</script>
+</body>
+</html>
