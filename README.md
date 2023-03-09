@@ -34,4 +34,4 @@
 
 [Лабораторное задание 4](https://crazybaldonly.github.io/Laboratornaya/Task4/lab2-4.html)
 
-[Лабораторное задание 4](https://crazybaldonly.github.io/Laboratornaya/Task4/lab2-5.html)
+[Лабораторное задание 5](https://crazybaldonly.github.io/Laboratornaya/Task4/lab2-5.html)
