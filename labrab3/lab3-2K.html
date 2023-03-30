@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Михайлов Николай</title>
+</head>
+<body>
+    <script>
+        let x = Number(prompt("Введите X", "0"));    
+        let y = Number(prompt("Введите Y", "0"));    
+        let z = Number(prompt("Введите Z", "0")); 
+        
+        function b (x, y, z) {
+            return (Math.E ** Math.abs(x - y)) * (Math.pow(Math.tan(z), 2) + 1) ** x;
+        }
+        
+        document.write(`<img src="./assets/2LRK.png">`);
+        document.write(`<p>B = ${b(x, y, z)}</p>`);
+    </script>
+</body>
+</html>

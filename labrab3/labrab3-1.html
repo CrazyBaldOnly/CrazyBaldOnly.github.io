@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- сделал с помощью шаблона в VSC -->
+    <title>Mikhaylov Nikolay</title>
+    <script>
+        let days = [
+            {size: 7, day: "Понедельник", color: "blue"},
+            {size: 6, day: "Вторник", color: "red"},
+            {size: 5, day: "Среда", color: "green"},
+            {size: 4, day: "Четверг", color: "yellow"},
+            {size: 3, day: "Пятница", color: "pink"},
+            {size: 2, day: "Суббота", color: "aqua"},
+            {size: 1, day: "Воскресенье", color: "black"},
+        ]
+        function weekDay(size, day, color) {
+            return `<p style="font-size:${size}em;color:${color};margin:0;">` + day + `</p>`;
+        }
+
+        days.forEach(function(day) {
+            document.write(weekDay(day.size, day.day, day.color))
+        })
+    </script>
+</head>
+<body>
