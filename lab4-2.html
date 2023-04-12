@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nikolay Mikhaylov</title>
+  </head>
+  <body>
+    <div id="original"></div>
+    <div id="changed"></div>
+
+    <script>
+      let array = []; // создаем пустой массив
+
+      // заполняем массив случайными числами от 1 до 100
+      for (let i = 0; i < 15; i++) {
+        array.push(Math.floor(Math.random() * 100) + 1);
+      }
+
+      // выводим исходный массив на экран
+      let originalDiv = document.getElementById('original');
+      let originalText = document.createTextNode('Исходный массив: ' + array.join(' '));
+      originalDiv.appendChild(originalText);
+
+      // ищем минимальный элемент в массиве
+      let min = array[0];
+      let minIndex = 0;
+      for (let i = 1; i < array.length; i++) {
+        if (array[i] < min) {
+          min = array[i];
+          minIndex = i;
+        }
+      }
+
+      // присваиваем значение минимального элемента последнему элементу массива
+      array[array.length - 1] = min;
+
+      // заменяем минимальный элемент на 3N
+      array[minIndex] = 3 * min;
+
+      // выводим измененный массив на экран
+      let changedDiv = document.getElementById('changed');
+      let changedText = document.createTextNode('Измененный массив: ' + array.join(' '));
+      changedDiv.appendChild(changedText);
+    </script>
+  </body>
+</html>

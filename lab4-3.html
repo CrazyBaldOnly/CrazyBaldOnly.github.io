@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mikhaylov Nikolay</title>
+  </head>
+  <body>
+    <div id="original"></div>
+    <div id="result"></div>
+
+    <script>
+      // Функция для вывода текста на HTML-страницу
+      function printToPage(text) {
+        let resultDiv = document.getElementById('result');
+        let resultText = document.createTextNode(text);
+        resultDiv.appendChild(resultText);
+        resultDiv.appendChild(document.createElement('br'));
+      }
+
+      // Сформируем массив
+      let array = [];
+      for (let i = 0; i < 15; i++) {
+        array.push(Math.floor(Math.random() * 100) + 1);
+      }
+
+      // Выведем массив на экран
+      let originalDiv = document.getElementById('original');
+      let originalText = document.createTextNode('Массив: ' + array.join(', '));
+      originalDiv.appendChild(originalText);
+
+      // Найдем среднее арифметическое чисел, неравных заданному C
+      let c = 50; // заданный C
+      let sum = 0;
+      let count = 0;
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] !== c) {
+          sum += array[i];
+          count++;
+        }
+      }
+      let average = sum / count;
+
+      // Выведем среднее арифметическое на экран
+      printToPage('Среднее арифметическое чисел, неравных ' + c + ': ' + average);
+
+      // Найдем произведение неположительных чисел, стоящих на четных местах
+      let product = 1;
+      for (let i = 0; i < array.length; i += 2) {
+        if (array[i] <= 0) {
+          product *= array[i];
+        }
+      }
+
+      // Выведем произведение на экран
+      printToPage('Произведение неположительных чисел, стоящих на четных местах: ' + product);
+    </script>
+  </body>
+</html>
