@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mikhaylov Nikolay</title>
+</head>
+<body>
+	<label for="plaintext">Введите текст для шифрования:</label>
+	<input type="text" id="plaintext">
+	<button onclick="encrypt()">Зашифровать</button>
+	<p id="ciphertext"></p>
+
+	<script>
+		function encrypt() {
+			let plaintext = document.getElementById("plaintext").value.toLowerCase();
+			let ciphertext = "";
+			for (let i = 0; i < plaintext.length; i++) {
+				let charCode = plaintext.charCodeAt(i);
+				if (charCode >= 97 && charCode <= 122) {
+					// Переход к следующей букве в алфавите
+					charCode = charCode + 1 > 122 ? 97 : charCode + 1;
+				}
+				ciphertext += String.fromCharCode(charCode);
+			}
+			document.getElementById("ciphertext").innerHTML = "Зашифрованный текст: " + ciphertext;
+		}
+	</script>
+</body>
+</html>

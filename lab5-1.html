@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Решение задачи на JavaScript</title>
+  </head>
+  <body>
+    <script>
+      const str = "дед ест пряник";
+      const words = str.split(" ");
+      
+      // помещаем третье слово после первого
+      const thirdWord = words[2];
+      words.splice(2, 1);
+      words.splice(1, 0, thirdWord);
+      
+      // находим количество слов с совпадающими первой и последней буквами
+      let count = 0;
+      for (let i = 0; i < words.length; i++) {
+        const word = words[i];
+        if (word[0] === word[word.length - 1]) {
+          count++;
+        }
+      }
+      
+      // выводим результаты в HTML-документе
+      const resultEl = document.createElement('p');
+      resultEl.textContent = `Строка после изменения: ${words.join(" ")}, а количество слов с совпадающими первой и последней буквами равно ${count}`;
+      document.body.appendChild(resultEl);
+    </script>
+  </body>
+</html>

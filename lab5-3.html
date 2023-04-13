@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mikhaylov Nikolay</title>
+</head>
+<body>
+	<h1>Перемешивание букв в словах</h1>
+	<p>Исходный текст:</p>
+	<p id="original-text">The quick brown fox jumps over the lazy dog.</p>
+	<p>Текст с перемешанными буквами:</p>
+	<p id="shuffled-text"></p>
+
+	<script>
+		// Получаем исходный текст из HTML-документа
+		const originalText = document.getElementById("original-text").textContent;
+
+		// Функция для перемешивания букв в слове
+		function shuffleWord(word) {
+			// Если слово короче или равно двум символам, не перемешиваем его
+			if (word.length <= 2) {
+				return word;
+			}
+
+			// Получаем первую и последнюю букву слова
+			const firstLetter = word.charAt(0);
+			const lastLetter = word.charAt(word.length - 1);
+
+			// Получаем оставшиеся буквы слова и перемешиваем их
+			const middleLetters = word.substring(1, word.length - 1).split("");
+			for (let i = middleLetters.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[middleLetters[i], middleLetters[j]] = [middleLetters[j], middleLetters[i]];
+			}
+
+			// Склеиваем буквы слова вместе и возвращаем результат
+			return firstLetter + middleLetters.join("") + lastLetter;
+		}
+
+		// Функция для перемешивания букв в каждом слове текста
+		function shuffleText(text) {
+			// Разбиваем текст на слова
+			const words = text.split(" ");
+
+			// Перемешиваем каждое слово
+			const shuffledWords = words.map(shuffleWord);
+
+			// Склеиваем перемешанные слова вместе и возвращаем результат
+			return shuffledWords.join(" ");
+		}
+
+		// Получаем текст с перемешанными буквами и выводим его в HTML-документ
+		const shuffledText = shuffleText(originalText);
+		document.getElementById("shuffled-text").textContent = shuffledText;
+	</script>
+</body>
+</html>

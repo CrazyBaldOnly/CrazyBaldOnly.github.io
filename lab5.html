@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Mikhaylov Nikolay</title>
+</head>
+<body>
+  <div id="output"></div>
+  <script>
+const text = "ST.ST. ST ST..ST. ST. ST.ST";
+const source = document.createElement('p')
+source.textContent = `Исходный текст ${text}`;
+document.body.appendChild(source)
+
+// подсчет количества точек перед пробелом
+let count = 0;
+for (let i = 0; i < text.length; i++) {
+  if (text[i] === '.' && text[i+1] === ' ') {
+    count++;
+  }
+}
+
+// замена каждой пары символов 'ST' на символ 'P'
+const replacedText = text.replace(/ST/g, 'P');
+
+// создание элементов для вывода результата на страницу
+const countElement = document.createElement('p');
+countElement.textContent = `Количество символов '.' перед пробелом: ${count}`;
+document.body.appendChild(countElement);
+
+const replacedElement = document.createElement('p');
+replacedElement.textContent = `Замененный текст: ${replacedText}`;
+document.body.appendChild(replacedElement);
+  </script>
+</body>
+</html>
