@@ -49,3 +49,12 @@
 [Лабораторное задание 3](https://crazybaldonly.github.io/Laboratornaya/lab4-3.html)
 
 [Лабораторное задание 4](https://crazybaldonly.github.io/Laboratornaya/lab4-4.html)
+
+# Лабораторная работа 5
+[Лабораторное задание 1](https://crazybaldonly.github.io/Laboratornaya/lab5.html)
+
+[Лабораторное задание 2](https://crazybaldonly.github.io/Laboratornaya/lab5-1.html)
+
+[Лабораторное задание 3](https://crazybaldonly.github.io/Laboratornaya/lab5-2.html)
+
+[Лабораторное задание 4](https://crazybaldonly.github.io/Laboratornaya/lab5-3.html)
