@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Пример класса "Видеокарта" на JavaScript</title>
+</head>
+<body>
+	<h1>Пример класса "Видеокарта" на JavaScript</h1>
+    <div id="videoCardInfo"></div>
+
+    <script>
+        // Определение класса "Видеокарта"
+        class VideoCard {
+          constructor(interfaceType, gpuManufacturer, gpuModel, gpuFrequency, videoMemorySize) {
+            this._interfaceType = interfaceType;
+            this._gpuManufacturer = gpuManufacturer;
+            this._gpuModel = gpuModel;
+            this._gpuFrequency = gpuFrequency;
+            this._videoMemorySize = videoMemorySize;
+          }
+      
+          // Геттеры и сеттеры для свойств
+          get interfaceType() {
+            return this._interfaceType;
+          }
+      
+          set interfaceType(value) {
+            this._interfaceType = value;
+          }
+      
+          get gpuManufacturer() {
+            return this._gpuManufacturer;
+          }
+      
+          set gpuManufacturer(value) {
+            this._gpuManufacturer = value;
+          }
+      
+          get gpuModel() {
+            return this._gpuModel;
+          }
+      
+          set gpuModel(value) {
+            this._gpuModel = value;
+          }
+      
+          get gpuFrequency() {
+            return this._gpuFrequency;
+          }
+      
+          set gpuFrequency(value) {
+            this._gpuFrequency = value;
+          }
+      
+          get videoMemorySize() {
+            return this._videoMemorySize;
+          }
+      
+          set videoMemorySize(value) {
+            this._videoMemorySize = value;
+          }
+      
+          // Метод вывода информации об объекте
+          displayInfo() {
+            const infoDiv = document.getElementById("videoCardInfo");
+            const info = `
+              <p>Интерфейс: ${this._interfaceType}</p>
+              <p>Производитель графического процессора: ${this._gpuManufacturer}</p>
+              <p>Графический процессор: ${this._gpuModel}</p>
+              <p>Частота графического процессора: ${this._gpuFrequency} МГц</p>
+              <p>Объем видеопамяти: ${this._videoMemorySize} Гб</p>
+            `;
+            infoDiv.innerHTML = info;
+          }
+        }
+      
+        // Создание объекта "видеокарта" с помощью класса
+        const myVideoCard = new VideoCard("PCI Express 3.0", "NVIDIA", "GeForce RTX 3080", 1710, 10);
+      
+        // Вывод информации об объекте "видеокарта"
+        myVideoCard.displayInfo();
+      
+        // Изменение значения свойства "Частота графического процессора"
+        myVideoCard.gpuFrequency = 1770;
+      
+        // Вывод обновленной информации об объекте "видеокарта"
+        myVideoCard.displayInfo();
+    </script>
+</body>
+</html>

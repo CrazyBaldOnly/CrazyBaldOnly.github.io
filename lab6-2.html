@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Видеокарта</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <h1>Видеокарта</h1>
+  <p id="videoCardInfo"></p>
+
+  <script>
+    // Функция-конструктор для создания объекта "Видеокарта"
+    function VideoCard(interface, gpuManufacturer, gpuModel, gpuClockSpeed, videoMemory) {
+      this.interface = interface;
+      this.gpuManufacturer = gpuManufacturer;
+      this.gpuModel = gpuModel;
+      this.gpuClockSpeed = gpuClockSpeed;
+      this.videoMemory = videoMemory;
+      this.releaseDate = new Date();
+
+      // Метод вывода информации об объекте
+      this.displayInfo = function() {
+        let info = "Интерфейс: " + this.interface + "<br>" +
+                   "Производитель графического процессора: " + this.gpuManufacturer + "<br>" +
+                   "Графический процессор: " + this.gpuModel + "<br>" +
+                   "Частота графического процессора: " + this.gpuClockSpeed + "<br>" +
+                   "Видеопамять: " + this.videoMemory + "<br>" +
+                   "Дата выхода на рынок: " + this.releaseDate.toLocaleDateString();
+
+        document.getElementById("videoCardInfo").innerHTML = info;
+      }
+    }
+
+    // Геттеры и сеттеры для доступа к свойствам объекта
+    Object.defineProperties(VideoCard.prototype, {
+      "Interface": {
+        get: function() {
+          return this.interface;
+        },
+        set: function(value) {
+          this.interface = value;
+        }
+      },
+      "GpuManufacturer": {
+        get: function() {
+          return this.gpuManufacturer;
+        },
+        set: function(value) {
+          this.gpuManufacturer = value;
+        }
+      },
+      "GpuModel": {
+        get: function() {
+          return this.gpuModel;
+        },
+        set: function(value) {
+          this.gpuModel = value;
+        }
+      },
+      "GpuClockSpeed": {
+        get: function() {
+          return this.gpuClockSpeed;
+        },
+        set: function(value) {
+          this.gpuClockSpeed = value;
+        }
+      },
+      "VideoMemory": {
+        get: function() {
+          return this.videoMemory;
+        },
+        set: function(value) {
+          this.videoMemory = value;
+        }
+      },
+      "ReleaseDate": {
+        get: function() {
+          return this.releaseDate;
+        }
+      }
+    });
+
+    // Создание объекта "Видеокарта"
+    let videoCard = new VideoCard("PCI Express 4.0", "Nvidia", "GeForce RTX 3080 Ti", "1365 MHz", "12 GB GDDR6X");
+
+    // Вызов метода вывода информации об объекте
+    videoCard.displayInfo();
+</script>
+</body>
+</html>

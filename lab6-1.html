@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mikhaylov Nikolay</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <h1>Видеокарта</h1>
+  <p id="videoCardInfo"></p>
+
+  <script>
+    let videoCard = {
+      interface: "PCI Express 4.0",
+      gpuManufacturer: "Nvidia",
+      gpuModel: "GeForce RTX 3080 Ti",
+      gpuClockSpeed: "1365 MHz",
+      videoMemory: "12 GB GDDR6X",
+
+      displayInfo: function() {
+        let info = "Интерфейс: " + this.interface + "<br>" +
+                   "Производитель графического процессора: " + this.gpuManufacturer + "<br>" +
+                   "Графический процессор: " + this.gpuModel + "<br>" +
+                   "Частота графического процессора: " + this.gpuClockSpeed + "<br>" +
+                   "Видеопамять: " + this.videoMemory;
+
+        document.getElementById("videoCardInfo").innerHTML = info;
+      }
+    };
+
+    // Вызов метода вывода информации об объекте
+    videoCard.displayInfo();
+  </script>
+</body>
+</html>
