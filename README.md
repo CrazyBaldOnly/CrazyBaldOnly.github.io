@@ -65,3 +65,16 @@
 [Лабораторное задание 2](https://crazybaldonly.github.io/Laboratornaya/lab6-2.html)
 
 [Лабораторное задание 3](https://crazybaldonly.github.io/Laboratornaya/lab6-3.html)
+
+# Лабораторная работа 7
+[Лабораторное задание 1](https://crazybaldonly.github.io/Laboratornaya/LR7/lab7-1.html)
+
+[Лабораторное задание 2](https://crazybaldonly.github.io/Laboratornaya/LR7/lab7-2.html)
+
+[Лабораторное задание 3](https://crazybaldonly.github.io/Laboratornaya/LR7/lab7-3.html)
+
+[Лабораторное задание 4](https://crazybaldonly.github.io/Laboratornaya/LR7/lab7-4.html)
+
+[Лабораторное задание 5](https://crazybaldonly.github.io/Laboratornaya/LR7/lab7-5.html)
+
+[Лабораторное задание 6](https://crazybaldonly.github.io/Laboratornaya/LR7/lab7-6.html)
