@@ -80,10 +80,10 @@
 [Лабораторное задание 6](https://crazybaldonly.github.io/Laboratornaya/LR7/lab7-6.html)
 
 # Лабораторная работа 9
-[Лабораторное задание 1]([https://crazybaldonly.github.io/Laboratornaya/LR7/labrab9-1.html])
+[Лабораторное задание 1]([https://crazybaldonly.github.io/Laboratornaya/labrab9-1.html])
 
-[Лабораторное задание 2]([https://crazybaldonly.github.io/Laboratornaya/LR7/labrab9-2.html])
+[Лабораторное задание 2]([https://crazybaldonly.github.io/Laboratornaya/labrab9-2.html])
 
-[Лабораторное задание 3]([https://crazybaldonly.github.io/Laboratornaya/LR7/labrab9-3.html])
+[Лабораторное задание 3]([https://crazybaldonly.github.io/Laboratornaya/labrab9-3.html])
 
-[Лабораторное задание 4]([https://crazybaldonly.github.io/Laboratornaya/LR7/labrab9-4.html])
+[Лабораторное задание 4]([https://crazybaldonly.github.io/Laboratornaya/labrab9-4.html])
