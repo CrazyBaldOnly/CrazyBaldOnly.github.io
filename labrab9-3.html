@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Футбольчик</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('assets/footballField.jpg');
+            background-size: cover;
+        }
+        #ball {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-image: url('assets/ball.png');
+            background-size: cover;
+            border-radius: 50%;
+            transition: all 0.5s ease;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="field"></div>
+    <div id="ball"></div>
+    <script>
+        const fieldImg = 'assets/footballField.jpg';
+        const ballImg = 'assets/ball.png';
+
+        const field = document.getElementById('field');
+        const ball = document.getElementById('ball');
+
+        let ballX = window.innerWidth / 2 - ball.offsetWidth / 2;
+        let ballY = window.innerHeight / 2 - ball.offsetHeight / 2;
+        ball.style.left = ballX + 'px';
+        ball.style.top = ballY + 'px';
+
+        field.addEventListener('click', (event) => {
+            const clickX = event.clientX;
+            const clickY = event.clientY;
+
+            ballX = clickX - ball.offsetWidth / 2;
+            ballY = clickY - ball.offsetHeight / 2;
+
+            if (ballX < 0) {
+            ballX = 0;
+            } else if (ballX > window.innerWidth - ball.offsetWidth) {
+            ballX = window.innerWidth - ball.offsetWidth;
+            }
+            if (ballY < 0) {
+            ballY = 0;
+            } else if (ballY > window.innerHeight - ball.offsetHeight) {
+            ballY = window.innerHeight - ball.offsetHeight;
+            }
+
+            ball.style.left = ballX + 'px';
+            ball.style.top = ballY + 'px';
+        });
+
+        field.style.backgroundImage = `url(${fieldImg})`;
+        ball.style.backgroundImage = `url(${ballImg})`;
+    </script>
+  </body>
+</html>

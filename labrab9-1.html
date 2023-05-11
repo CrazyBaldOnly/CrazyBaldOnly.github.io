@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mikhyalov Nikolay</title>
+</head>
+<body>
+  <!-- Форма -->
+  <form id="myForm">
+    <button onclick="history.back(); return false">Назад</button>
+    <button onclick="history.forward(); return false">Вперед</button>
+    <label for="address">Адрес:</label>
+    <input type="text" id="address" name="address" placeholder="Введите адрес">
+    <br>
+    <input type="button" value="Загрузить в фрейм" onclick="loadPageInFrame()">
+    <input type="button" value="Загрузить в новом окне" onclick="loadPageInNewWindow()">
+    <input type="button" value="Перезагрузить" onclick="reloadPage()">
+  </form>
+
+  <!-- Фрейм -->
+  <iframe id="myFrame" src="about:blank" style="position: fixed; bottom: 0; left: 0; width: 100%; height: 300px;"></iframe>
+
+  <script>
+    // Получаем элементы формы и фрейма
+    var form = document.getElementById("myForm");
+    var frame = document.getElementById("myFrame");
+
+    // Функция для загрузки страницы в фрейм
+    function loadPageInFrame() {
+      var address = form.elements["address"].value;
+      frame.src = address;
+    }
+
+    // Функция для загрузки страницы в новом окне
+    function loadPageInNewWindow() {
+      var address = form.elements["address"].value;
+      window.open(address);
+    }
+
+    // Функция для повторной загрузки страницы в фрейме
+    function reloadPage() {
+      frame.contentWindow.location.reload();
+    }
+  </script>
+</body>
+</html>
