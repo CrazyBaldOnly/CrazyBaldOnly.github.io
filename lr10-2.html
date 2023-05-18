@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Калькулятор</title>
+  <style>
+    .calculator {
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .calculator input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 5px;
+      font-size: 18px;
+    }
+
+    .calculator button {
+      width: 48%;
+      margin-right: 4%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="result" readonly>
+    <button onclick="clearInput()">C</button>
+    <button onclick="deleteLastChar()">&larr;</button>
+    <button onclick="appendToInput('/')">/</button>
+    <br>
+    <button onclick="appendToInput('7')">7</button>
+    <button onclick="appendToInput('8')">8</button>
+    <button onclick="appendToInput('9')">9</button>
+    <button onclick="appendToInput('*')">*</button>
+    <br>
+    <button onclick="appendToInput('4')">4</button>
+    <button onclick="appendToInput('5')">5</button>
+    <button onclick="appendToInput('6')">6</button>
+    <button onclick="appendToInput('-')">-</button>
+    <br>
+    <button onclick="appendToInput('1')">1</button>
+    <button onclick="appendToInput('2')">2</button>
+    <button onclick="appendToInput('3')">3</button>
+    <button onclick="appendToInput('+')">+</button>
+    <br>
+    <button onclick="appendToInput('0')">0</button>
+    <button onclick="appendToInput('.')">.</button>
+    <button onclick="calculateResult()">=</button>
+  </div>
+
+  <script>
+    var memory = 0;
+
+    function appendToInput(value) {
+      var resultInput = document.getElementById('result');
+      resultInput.value += value;
+    }
+
+    function clearInput() {
+      var resultInput = document.getElementById('result');
+      resultInput.value = '';
+    }
+
+    function deleteLastChar() {
+      var resultInput = document.getElementById('result');
+      resultInput.value = resultInput.value.slice(0, -1);
+    }
+
+    function calculateResult() {
+      var resultInput = document.getElementById('result');
+      var expression = resultInput.value;
+
+      try {
+        var result = eval(expression);
+        resultInput.value = result;
+
+        // Сохраняем результат в памяти
+        memory = result;
+      } catch (error) {
+        resultInput.value = 'Ошибка';
+      }
+    }
+
+    document.onkeydown = function(event) {
+      var key = event.key;
+
+      switch (key) {
+        case 'Enter':
+          calculateResult();
+          break;
+        case 'Backspace':
+          deleteLastChar();
+          break;
+        case 'c':
+        case 'C':
+          clearInput();
+          break;
+        case '/':
+        case '*':
+        case '-':
+        case '+':
+          appendToInput(key);
+          break;
+        default:
+          if (/[0-9.]/.test(key)) {
+            appendToInput(key);
+          }
+      }
+    };
+  </script>
+</body>
+</html>

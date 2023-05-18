@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Таблица с видеокартами</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <table id="videoCardTable">
+    <thead>
+      <tr>
+        <th>Интерфейс</th>
+        <th>Производитель графического процессора</th>
+        <th>Графический процессор</th>
+        <th>Частота графического процессора</th>
+        <th>Видеопамять (объем)</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    var videoCards = [
+      {
+        "Интерфейс": "PCIe 4.0",
+        "Производитель графического процессора": "NVIDIA",
+        "Графический процессор": "RTX 3080",
+        "Частота графического процессора": "1710 МГц",
+        "Видеопамять (объем)": "10 ГБ"
+      },
+      {
+        "Интерфейс": "PCIe 3.0",
+        "Производитель графического процессора": "AMD",
+        "Графический процессор": "RX 6800",
+        "Частота графического процессора": "1700 МГц",
+        "Видеопамять (объем)": "16 ГБ"
+      },
+      {
+        "Интерфейс": "PCIe 666.0",
+        "Производитель графического процессора": "NVIDIA из будущего",
+        "Графический процессор": "RTX 30080",
+        "Частота графического процессора": "21710 МГц",
+        "Видеопамять (объем)": "910 ГБ"
+      },
+    ];
+
+    localStorage.setItem("videoCards", JSON.stringify(videoCards));
+
+    $(document).ready(function() {
+      var videoCardsData = JSON.parse(localStorage.getItem("videoCards"));
+
+      if (videoCardsData && videoCardsData.length > 0) {
+        var tableBody = $("#videoCardTable tbody");
+
+        $.each(videoCardsData, function(index, videoCard) {
+          var row = $("<tr>");
+
+          $.each(videoCard, function(key, value) {
+            $("<td>").text(value).appendTo(row);
+          });
+
+          tableBody.append(row);
+        });
+      }
+    });
+
+    $(document).on("click", "#videoCardTable th", function() {
+      var columnIndex = $(this).index();
+      var table = $("#videoCardTable");
+      var rows = table.find("tbody tr").toArray().sort(comparer(columnIndex));
+
+      this.asc = !this.asc;
+      if (!this.asc) {
+        rows = rows.reverse();
+      }
+      for (var i = 0; i < rows.length; i++) {
+        table.append(rows[i]);
+      }
+    });
+
+    function comparer(index) {
+      return function(a, b) {
+        var valA = getCellValue(a, index),
+            valB = getCellValue(b, index);
+        return $.isNumeric(valA) && $.isNumeric(valB) ?
+               valA - valB : valA.toString().localeCompare(valB);
+      };
+    }
+
+    function getCellValue(row, index) {
+      return $(row).children("td").eq(index).text();
+    }
+  </script>
+</body>
+</html>

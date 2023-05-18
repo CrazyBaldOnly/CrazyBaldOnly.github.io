@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Календарь</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 5px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    td {
+      cursor: pointer;
+      width: calc(100% / 7);
+      height: 30px;
+    }
+
+    .selected {
+      background-color: #ccc;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <label for="dateInput">Дата:</label>
+  <input type="date" id="dateInput">
+  <br>
+  <table id="calendar"></table>
+
+  <script>
+    $(document).ready(function() {
+      var dateInput = $('#dateInput');
+      var calendar = $('#calendar');
+
+      dateInput.on('input', function() {
+        var selectedDate = new Date(dateInput.val());
+        renderCalendar(selectedDate);
+      });
+
+      function renderCalendar(date) {
+        calendar.empty();
+
+        var currentDate = new Date(date.getFullYear(), date.getMonth(), 1);
+
+        var firstDayOfWeek = (currentDate.getDay() + 6) % 7;
+
+        var tableHead = $('<thead>');
+        var tableHeadRow = $('<tr>');
+        var daysOfWeek = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
+        for (var i = 0; i < daysOfWeek.length; i++) {
+          $('<th>').text(daysOfWeek[i]).appendTo(tableHeadRow);
+        }
+
+        tableHead.append(tableHeadRow);
+        calendar.append(tableHead);
+        var tableBody = $('<tbody>');
+
+        var week = $('<tr>');
+
+        for (var i = 0; i < firstDayOfWeek; i++) {
+          $('<td>').appendTo(week);
+        }
+
+        while (currentDate.getMonth() === date.getMonth()) {
+          var day = currentDate.getDate();
+          var cell = $('<td>').text(day);
+
+          if (currentDate.toDateString() === date.toDateString()) {
+            cell.addClass('selected');
+          }
+
+          cell.appendTo(week);
+
+          if (currentDate.getDay() === 0) {
+            tableBody.append(week);
+            week = $('<tr>');
+          }
+
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        var lastDayOfWeek = (currentDate.getDay() + 6) % 7;
+        if (lastDayOfWeek !== 0) {
+          for (var i = lastDayOfWeek; i < 7; i++) {
+            $('<td>').appendTo(week);
+          }
+          tableBody.append(week);
+        }
+
+        calendar.append(tableBody);
+
+        $('td', tableBody).on('click', function() {
+          $('td.selected').removeClass('selected');
+          $(this).addClass('selected');
+          var selectedDay = $(this).text();
+          var selectedMonth = date.getMonth() + 1;
+          var selectedYear = date.getFullYear();
+          var selectedDate = selectedYear + '-' + selectedMonth + '-' + selectedDay;
+          dateInput.val(selectedDate);
+        });
+      }
+
+      var currentDate = new Date();
+      dateInput.val(currentDate.toISOString().substring(0, 10));
+      renderCalendar(currentDate);
+    });
+  </script>
+</body>
+</html>
