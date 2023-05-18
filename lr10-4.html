@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Календарь</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 5px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    td {
+      cursor: pointer;
+      width: calc(100% / 7);
+      height: 30px;
+    }
+
+    .selected {
+      background-color: #ccc;
+    }
+
+    .event-day {
+      background-color: yellow;
+    }
+
+    .calendar-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .month-navigation {
+      display: flex;
+      justify-content: space-between;
+      width: 300px;
+      margin-bottom: 10px;
+    }
+
+    .month-navigation button {
+      padding: 5px 10px;
+      font-size: 16px;
+      background-color: #f2f2f2;
+      border: none;
+      cursor: pointer;
+    }
+
+    .current-month-label {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="calendar-container">
+    <div class="month-navigation">
+      <button id="prevMonthButton">←</button>
+      <div class="current-month-label" id="currentMonthLabel"></div>
+      <button id="nextMonthButton">→</button>
+    </div>
+
+    <label for="dateInput">Дата:</label>
+    <input type="date" id="dateInput">
+    <br>
+    <table id="calendar"></table>
+
+    <!-- Модальное окно для добавления и просмотра информации о мероприятии -->
+    <div id="modal" style="display: none;">
+      <h2 id="modalTitle"></h2>
+      <textarea id="eventDescription" placeholder="Описание мероприятия"></textarea>
+      <button id="saveEventButton">Сохранить</button>
+      <button id="closeModalButton">Закрыть</button>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      var dateInput = $('#dateInput');
+      var calendar = $('#calendar');
+      var events = {};
+
+      var storedEvents = localStorage.getItem('events');
+      if (storedEvents) {
+        events = JSON.parse(storedEvents);
+      }
+
+      dateInput.on('input', function() {
+        var selectedDate = new Date(dateInput.val());
+        renderCalendar(selectedDate);
+      });
+
+      function showModal(date) {
+        var modal = $('#modal');
+        var modalTitle = $('#modalTitle');
+        var eventDescription = $('#eventDescription');
+        var saveEventButton = $('#saveEventButton');
+        var closeModalButton = $('#closeModalButton');
+
+        if (events[date]) {
+          modalTitle.text(date + ' - Мероприятие');
+          eventDescription.val(events[date]);
+          saveEventButton.text('Обновить');
+        } else {
+          modalTitle.text(date + ' - Новое мероприятие');
+          eventDescription.val('');
+          saveEventButton.text('Сохранить');
+        }
+
+        modal.show();
+
+        saveEventButton.off().on('click', function() {
+          var description = eventDescription.val();
+
+          if (description.trim() !== '') {
+            events[date] = description;
+            localStorage.setItem('events', JSON.stringify(events));
+          } else {
+            delete events[date];
+            localStorage.setItem('events', JSON.stringify(events));
+          }
+
+          modal.hide();
+          renderCalendar(new Date(date));
+        });
+
+        closeModalButton.off().on('click', function() {
+          modal.hide();
+        });
+      }
+
+      function renderCalendar(date) {
+        calendar.empty();
+
+        var currentDate = new Date(date.getFullYear(), date.getMonth(), 1);
+
+        var firstDayOfWeek = (currentDate.getDay() + 6) % 7;
+
+        var tableHead = $('<thead>');
+        var tableHeadRow = $('<tr>');
+        var daysOfWeek = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
+        for (var i = 0; i < daysOfWeek.length; i++) {
+          $('<th>').text(daysOfWeek[i]).appendTo(tableHeadRow);
+        }
+
+        tableHead.append(tableHeadRow);
+        calendar.append(tableHead);
+        var tableBody = $('<tbody>');
+
+        var week = $('<tr>');
+
+        for (var i = 0; i < firstDayOfWeek; i++) {
+          $('<td>').appendTo(week);
+        }
+
+        while (currentDate.getMonth() === date.getMonth()) {
+          var day = currentDate.getDate();
+          var cell = $('<td>').text(day);
+
+          var cellDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + day;
+
+          if (currentDate.toDateString() === date.toDateString()) {
+            cell.addClass('selected');
+          }
+
+          if (events[cellDate]) {
+            cell.addClass('event-day');
+          }
+
+          cell.appendTo(week);
+
+          if (currentDate.getDay() === 0) {
+            tableBody.append(week);
+            week = $('<tr>');
+          }
+
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        var lastDayOfWeek = (currentDate.getDay() + 6) % 7;
+        if (lastDayOfWeek !== 0) {
+          for (var i = lastDayOfWeek; i < 7; i++) {
+            $('<td>').appendTo(week);
+          }
+          tableBody.append(week);
+        }
+
+        calendar.append(tableBody);
+
+        $('td', tableBody).on('click', function() {
+          var selectedDay = $(this).text();
+          var selectedMonth = date.getMonth() + 1;
+          var selectedYear = date.getFullYear();
+          var selectedDate = selectedYear + '-' + selectedMonth + '-' + selectedDay;
+          showModal(selectedDate);
+        });
+
+        var currentMonthLabel = $('#currentMonthLabel');
+        currentMonthLabel.text(date.toLocaleDateString('default', { month: 'long', year: 'numeric' }));
+
+        var prevMonthButton = $('#prevMonthButton');
+        prevMonthButton.off().on('click', function() {
+          var prevMonth = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+          dateInput.val(prevMonth.toISOString().substring(0, 10));
+          renderCalendar(prevMonth);
+        });
+
+        var nextMonthButton = $('#nextMonthButton');
+        nextMonthButton.off().on('click', function() {
+          var nextMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+          dateInput.val(nextMonth.toISOString().substring(0, 10));
+          renderCalendar(nextMonth);
+        });
+      }
+
+      var currentDate = new Date();
+      dateInput.val(currentDate.toISOString().substring(0, 10));
+      renderCalendar(currentDate);
+    });
+  </script>
+</body>
+</html>
