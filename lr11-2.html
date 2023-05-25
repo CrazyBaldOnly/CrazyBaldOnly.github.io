@@ -1,122 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Исландия</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-    }
-    table td {
-      padding: 10px;
-      text-align: center;
-      border: 1px solid #000000;
-    }
-    thead td {
-      background: rgba(65, 105, 225, 0.5);
-    }
-    tbody td {
-      font-weight: 800;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Вариант 15</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    table td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #000000;
+    }
+
+    thead td {
+        background: rgba(65, 105, 225, 0.5);
+    }
+
+    tbody td {
+        font-weight: 800;
+    }
+</style>
 <body>
-  <table>
+<div>
+    от <input type="date" id="start"> до <input type="date" id="end">
+</div>
+<br>
+<button onclick="loadTableInfo()">Построить таблицу</button>
+<br>
+<table>
     <thead>
     <tr>
-      <td>Флаг страны</td>
-      <td>Название страны</td>
-      <td>Название валюты (англ.)</td>
-      <td>Название валюты (бел.)</td>
-      <td>Курс</td>
+        <td>Дата</td>
+        <td>Валюта</td>
+        <td>Курс</td>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
     </tbody>
-  </table>
+</table>
+<script>
+    const baseURL = "https://api.nbrb.by/exrates/rates/453?";
+    const tbody = $("tbody");
 
-  <label for="start-date">Начальная дата:</label>
-  <input type="date" id="start-date">
-  <label for="end-date">Конечная дата:</label>
-  <input type="date" id="end-date">
-  <button id="get-data-button">Получить данные</button>
+    function loadTableInfo() {
+        const startDate = $("#start").val();
+        const endDate = $("#end").val();
 
-  <script>
-    const tds = $("tbody > tr > td");
-
-    function fetchData(url) {
-      return new Promise(function(resolve, reject) {
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              resolve(xhr.responseText);
-            } else {
-              reject(xhr.statusText);
-            }
-          }
-        };
-        xhr.open("GET", url);
-        xhr.send();
-      });
-    }
-
-    function fetchCurrencyData() {
-      const currencyUrl = "https://api.nbrb.by/exrates/currencies/453";
-      const priceUrl = "https://api.nbrb.by/exrates/rates/453";
-
-      return Promise.all([fetchData(currencyUrl), fetchData(priceUrl)]);
-    }
-
-    function processData(currencyData, priceData) {
-      const startDate = new Date(document.getElementById("start-date").value);
-      const endDate = new Date(document.getElementById("end-date").value);
-
-      const flag = tds[0];
-      const countryName = tds[1];
-      const countryNameEng = tds[2];
-      const countryNameBel = tds[3];
-      const countryCourse = tds[4];
-
-      const responseCurrency = JSON.parse(currencyData);
-      const responsePrice = JSON.parse(priceData);
-
-      const flagImage = document.createElement("img");
-      flagImage.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Iceland.svg/320px-Flag_of_Iceland.svg.png";
-      flag.appendChild(flagImage);
-
-      countryName.innerHTML = "Исландия";
-      countryNameEng.innerHTML = responseCurrency.Cur_Name_Eng;
-      countryNameBel.innerHTML = responseCurrency.Cur_Name_Bel;
-      countryCourse.innerHTML = responsePrice.Cur_OfficialRate;
-
-      // Вывод остальных данных по динамике курса валюты за указанный период
-      // Можно использовать полученные данные responseCurrency и responsePrice
-    }
-
-    document.getElementById("get-data-button").addEventListener("click", function() {
-      const startDate = document.getElementById("start-date").value;
-      const endDate = document.getElementById("end-date").value;
-
-      const dataPromise = fetchCurrencyData();
-
-      dataPromise
-        .then(function(data) {
-          processData(data[0], data[1]);
-        })
-        .catch(function(error) {
-          console.log("Ошибка получения данных:", error);
+        const arr = getDateArray(startDate, endDate);
+        const promisses = arr.map(date => {
+            return fetch(baseURL + "ondate=" + date).then(resolve => resolve.json());
         });
-    });
-  </script>
+
+        Promise.all(promisses).then(data => {
+            data.forEach(d => {
+                addTr(d, tbody)
+            })
+        })
+    }
+
+    function getDateArray(start, end) {
+        const dateArray = [start]
+        let currentDate = start;
+
+        while (currentDate < end) {
+            const date = new Date(currentDate).getTime() + 24 * 60 * 60 * 1000;
+            currentDate = formatDate(new Date(date));
+            dateArray.push(currentDate);
+        }
+
+        return dateArray;
+    }
+
+    function formatDate(date) {
+        let year = date.getFullYear();
+        let month = ("0" + (date.getMonth() + 1)).slice(-2);
+        let day = ("0" + date.getDate()).slice(-2);
+        return `${year}-${month}-${day}`;
+    }
+
+    function addTr(resolve, tbody) {
+        tbody.append(`<tr>
+            <td>${formatDate(new Date(resolve.Date))}</td>
+            <td>${resolve.Cur_Abbreviation}</td>
+            <td>${resolve.Cur_OfficialRate}</td>
+        </tr>`)
+    }
+</script>
 </body>
 </html>
