@@ -96,3 +96,11 @@
 [Лабораторное задание 3](https://crazybaldonly.github.io/Laboratornaya/lr10-3.html)
 
 [Лабораторное задание 4](https://crazybaldonly.github.io/Laboratornaya/lr10-4.html)
+
+# Лабораторная работа 11
+[Лабораторное задание 1](https://crazybaldonly.github.io/Laboratornaya/lr11-1.html)
+
+[Лабораторное задание 2](https://crazybaldonly.github.io/Laboratornaya/lr11-2.html)
+
+[Лабораторное задание 3](https://crazybaldonly.github.io/Laboratornaya/lr11-3.html)
+
